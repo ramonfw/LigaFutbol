@@ -1,0 +1,33 @@
+AppBundle\Entity\Jugadores:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\JugadoresRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        idclub:
+            type: integer
+        nombre:
+            type: string
+            length: 255
+            unique: true
+        dorsal:
+            type: integer
+
+    manyToOne:
+        club:
+            targetEntity: Club
+#            cascade: {  }
+            mappedBy: null
+#Tenemos que añadir el inversedBy
+            inversedBy: jugadores
+            joinColumns:
+                idclub:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    lifecycleCallbacks: {  }

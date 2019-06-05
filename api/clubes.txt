@@ -1,0 +1,5 @@
+Real Madridd;url-escudo-RM #
+FC Barcelonaa;url-escudo-FCB #
+Atletico de Madridd;url-escudo-ATM #
+Valencia FC;url-escudo-VFC #
+Sevilla FC;url-escudo-SFC

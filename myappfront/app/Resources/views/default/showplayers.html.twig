@@ -1,0 +1,13 @@
+
+     {% block showplayers %}
+        <table border=1>
+            <tr>
+                <td>Identidicador Club</td><td>Nombre del Jugador</td><td>Dorsal</td>
+            </tr>
+            {% for resp1 in respuesta %}
+            <tr>
+                <td>{{ resp1.idclub }}</td><td>{{ resp1.nombre }}</td><td>{{ resp1.dorsal }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endblock %}

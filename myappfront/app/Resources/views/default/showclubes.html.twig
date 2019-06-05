@@ -1,0 +1,14 @@
+
+     {% block showclubes %}
+        <table border=1>
+            <tr>
+                <td>Identidicador</td><td>Nombre del Club</td><td>Escudo del club</td>
+            </tr>
+            {% for resp1 in respuesta %}
+            <tr>
+                <td>{{ resp1.id }}</td>
+                <td><a href='{{ url('homeroute') }}list/jugadores/{{ resp1.id }}'>{{ resp1.nombre }}</a>  </td><td>{{ resp1.escudo }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endblock %}

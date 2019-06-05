@@ -1,0 +1,17 @@
+﻿1;Ariel Carvajal;15 #
+1;Keylor Navas;2 #
+1;Luca Modric;10 #
+1;Marcelo Vieira;7 #
+1;Rafael Varane;4 #
+1;Sergio Ramos;3 #
+2;Gerard Piqué;6 #
+2;Ivan Raquitic;13 #
+2;Lionel Messi;10 #
+2;Luis Suarez;9 #
+2;Sergio Busquets;11 #
+2;Yordy Alba;14 #
+3;Alvaro Morata;20 #
+3;Diego Costa;9 #
+3;Diego Godin;5 #
+3;Fillippe Luis;13 #
+3;Koke Resurreccion;12 #

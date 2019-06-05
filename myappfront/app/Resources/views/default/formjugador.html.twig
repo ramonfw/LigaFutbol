@@ -1,0 +1,106 @@
+        
+        {% set mostrardiv="display:none;" %}
+        {% if respuesta != "" %}
+            {% set mostrardiv="" %}
+        {% endif %}
+            <div id='div_response' align='center' style='{{mostrardiv}}color:blue;background-color:#f96be9;margin:5px;padding:5px'>{{ respuesta }}</div>
+
+        <form name="form" id="myform" method="post" action="{{ vurlpost }}{{ hhrefidclub }}">
+        <div id="form">
+            <div>
+                <label for="form_nombre" class="required">Nombre del jugador</label>
+                <input type="text" id="form_nombre" name="nombre" required="required" class="form-control" style="margin-bottom:15px" />
+            </div>
+            <div>
+                <label for="form_dorsal" class="required">
+                    Dorsal
+                </label>
+                <input type="text" id="form_dorsal" name="dorsal" required="required" class="form-control" style="margin-bottom:15px" />
+            </div>
+            <input type="hidden" id="form_idclub" name="idclub" value={{ idclub }} class="form-control" />
+            <div>
+                <button type="submit" id="form_Save" name="Save" class="btn btn-primary" style="margin-bottom:15px; display:none">
+                    Agregar jugador (Controller)
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit"  id="form_Save_ajax" name="Save" class="btn btn-primary" style="margin-bottom:15px">
+                    Agregar jugador (AJAX)
+                </button>
+            </div>
+            <input type="hidden" id="form__token" name="_token" value="cwHO2Lqp8L-YfKf8LPm5J7IagsuBj9pKCd-Jz6c-VtY" />
+        </div>        
+        </form>
+
+        <script>
+
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+        $(document).on("click", "#form_Save_ajax", function(e)
+        {
+          e.preventDefault();
+          var form = $("#myform");
+          $('#div_response').html('');
+
+          if(!form[0].checkValidity())
+          {
+            alert("datos incompletos");
+            return false;
+          }
+
+          var form_data = form.serializeObject();
+
+          $('#form_Save_ajax').attr("disabled",true);
+
+          $.ajax({
+            url: '{{ api_add_jugador_url }}',
+            type: 'POST',
+            dataType: 'json',
+            data: form_data,
+            success:function(data)
+            {
+              if(data.result == 'Ko')
+              {
+                //alert("[API.] ERROR\n "+data.mensaje);
+                $('#div_response').show();
+                $('#div_response').html(data.mensaje);
+              }
+              if(data.result == 'Ok')
+              {
+                alert("[API] SUCCESS\n "+data.mensaje);
+              }
+
+              $('#form_Save_ajax').attr("disabled",false);
+            },
+            error:function(data)
+            {
+              strError = JSON.stringify(data);
+              p1=strError.indexOf("Exception\\");
+              if (p1>0)
+                p1=p1+13;
+              p2=strError.indexOf("trace");
+              if (p2>0)
+                p2=p2-5;
+              strError2=strError.substring(p1,p2);
+              alert("ERROR: " + strError2);
+
+              $('#form_Save_ajax').attr("disabled",false);
+            }
+          });
+        });
+
+        </script>

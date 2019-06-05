@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+
+        {% block body %}
+        <h2 class=page-header>Agregar jugador</h2>
+        {{form_start(form)}}
+
+        {{form_widget(form)}}
+        {{form_end(form)}}
+        {% endblock %}
+
+    </body>
+</html>

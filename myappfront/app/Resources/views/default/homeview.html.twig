@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Liga FANTASIA{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    </head>
+    <body>
+        {% set hhrefget = "" %}
+        {% set hhrefpost = "" %}
+        {% set vurlpost = "" %}
+        {% set vurlget = "" %}
+        {% set hhrefidclub = "" %}
+        {% set fontcolor = "gray" %}
+        {% set actCursor = "cursor:no-drop;" %}
+        {% set rootRoute = "" %}
+        {% if idclub != 0 %}
+            {% set hhrefget = "href=" %}
+            {% set vurlget = urlget %}
+            {% set hhrefpost = "href=" %}
+            {% set vurlpost = urlpost %}
+            {% set hhrefidclub = idclub %}
+            {% set fontcolor = "black" %}
+            {% set actCursor = "cursor:default;" %}
+            {% set rootRoute = url('homeroute') %}
+        {% endif %}
+                            
+        {% block body %}
+        <h2 class=page-header>Liga FANTASIA</h2>   
+
+        <table style='width:60%;border:1px solid black' >
+            <tr style='border:1px solid black' >
+                <td style='width:20%;border:2px solid black'>Menu</td>
+                <td style='width:80%;border:2px solid black'><label style='font-size:20px;font-weight:bold;'>{{ titulo }}</label></td>
+            </tr>
+            <tr>
+                <td>
+
+                    <table>
+                        <tr>
+                            <td style='border:1px solid black'><a href="{{ url('homeroute') }}list/clubes">Clubes</a></td>
+                        </tr>
+                        {% if urlget != "" %}
+                        <tr>
+                            <td style='border:1px solid black;{{ actCursor }}color:{{ fontcolor }}'><a {{ hhrefget }}{{ rootRoute }}{{ vurlget }}{{ hhrefidclub }}>Jugadores del club</a></td>
+                        </tr>
+                        {% endif %}
+                        {% if urlpost != "" %}
+                        <tr>
+                            <td style='border:1px solid black;{{ actCursor }}color:{{ fontcolor }}'><a {{ hhrefpost }}{{ rootRoute }}{{ vurlpost }}{{ hhrefidclub }}>Nuevo jugador</a></td>
+                        </tr>
+                        {% endif %}
+                    </table>
+
+                </td>
+                <td style='padding:15px'>
+                    {% block info %}
+                        {{ include(vista, { 'respuesta': respuesta }) }}
+                    {% endblock %}
+                </td>
+            </tr>
+        </table>
+
+        {% endblock %}
+
+    </body>
+</html>

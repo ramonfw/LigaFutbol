@@ -1,0 +1,28 @@
+AppBundle\Entity\Club:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ClubRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: 255
+            unique: true
+        escudo:
+            type: string
+            length: 255
+
+    #Añadimos la relación oneToMany
+    oneToMany:
+        #Relación de uno a muchos, un club puede tener muchas jugadores
+        jugadores:
+            targetEntity: Jugadores
+            mappedBy: club
+            cascade: ["persist"]
+
+    lifecycleCallbacks: {  }

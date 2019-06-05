@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        {# Add reCAPTCHA api provided by website #}
+        <script src='https://www.google.com/reCAPTCHA/api.js'async defer></script>
+        {% block body %}
+        <h2 class=page-header>create todo with captcha</h2>
+        {{form_start(form)}}
+         {# Add the reCAPTCHA div to show in form #}
+        <div class="g-reCAPTCHA" data-sitekey="6LeTXQgUAAAAAGByWkRSVeJxE274kd7zz8_ksXI2"></div>
+        {{form_widget(form)}}
+        {{form_end(form)}}
+        {% endblock %}
+
+    </body>
+</html>

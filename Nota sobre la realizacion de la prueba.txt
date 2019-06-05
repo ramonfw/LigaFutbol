@@ -1,0 +1,63 @@
+Nota sobre la realizacion de la prueba:
+=======================================
+
+El ejercicio se cumplió al 100%, solo se excluyó la parte deseable (ReactJS o Vue.js). 
+
+la aplicacion consta de una api REST Symfony, y una apliucación Symfony que la consume.
+
+La API está en la carpeta API del proyecto, el front en la carpeta Myappfront del proyecto.
+
+Las pruebas de ejecución conjunta se deben realizar con el servidor de Symfony abierto el localhost:8000 (por defecto), y el proyecto myappfront lanzado en localhost:8001
+
+El front se ejecutó con twig y jQuery, incluyendo el uso de Ajax para adicionar un jugador.
+El formulario de adicionar jugador, posee un botón oculto que realiza la adición del jugador mediante el post del formulario.
+
+
+
+
+Test Unitario con PHPUnit
+=========================
+
+El test unitario se hace con el endpoint localhost:8000/Clubes, y se chequea la respuesta con codigo, 200, que el content type sea Json, y que la respuesta tenga un record o mas.
+
+--------------------------------------------------
+C:\xampp\htdocs\symfony\api>.\vendor\bin\simple-phpunit .\tests\AppBundle\Controller\apiControllerTest.php
+PHPUnit 7.4.5 by Sebastian Bergmann and contributors.
+
+Testing Tests\AppBundle\Controller\ApiControllerTest
+.                                                                   1 / 1 (100%)
+
+Testea que el código de respuesta es OK
+
+Testea que el código de estado es exactamente 200
+
+Testea que la cabecera 'Content-Type' es 'application/json'
+
+Testea que la respuesta no sea vacía (contiene 5 elementos)
+
+
+
+Time: 612 ms, Memory: 18.00 MB
+
+OK (1 test, 4 assertions)
+
+C:\xampp\htdocs\symfony\api>
+
+Actualizacion de la base de datos con Fixtures
+==============================================
+
+os datos de prueba están en los archivos clubes.txt y jugadores.txt, que son utilizados por LoadDataLiga (Fixture interface) para actualizar los datos iniciales.
+En el archivo apidb_exportada.sql hay un dump de la base de datos, que puede servir como data inicial
+
+Ejecución de la actualización:
+------------------------------
+
+C:\xampp\htdocs\symfony\api>php bin/console doctrine:fixtures:load
+
+ Careful, database will be purged. Do you want to continue? (yes/no) [no]:
+ > yes
+
+   > purging database
+   > loading AppBundle\DataFixtures\ORM\LoadDataLiga
+
+C:\xampp\htdocs\symfony\api>
