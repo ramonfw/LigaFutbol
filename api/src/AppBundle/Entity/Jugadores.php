@@ -47,6 +47,17 @@ class Jugadores
         return $this;
     }
 
+    /**
+     * Set club
+     *
+     * @param Club $club
+     *
+     * @return Jugadores
+     */
+    public function setClub(Club $club)
+    {
+        $this->club = $club;
+    }
 
     /**
      * Get id

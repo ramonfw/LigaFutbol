@@ -41,6 +41,24 @@ class Club
     }
 
 
+    public function addJugadores(Jugadores $jugador)
+    {
+        $jugador->setClub($this); // This is the line you're probably looking for
+        $this->jugadores[] = $jugador;
+
+        return $this;
+    }
+
+/*
+    public function addImage(Image $image)
+    {
+        $image->setSlider($this); // This is the line you're probably looking for
+        $this->images[] = $image;
+
+        return $this;
+    }
+*/
+
     /**
      * Get id
      *
