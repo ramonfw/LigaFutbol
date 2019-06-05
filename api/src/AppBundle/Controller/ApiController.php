@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 
 use AppBundle\Entity\Jugadores;
+use AppBundle\Entity\Club;
 
 
 class ApiController extends AbstractFOSRestController
@@ -89,14 +90,15 @@ class ApiController extends AbstractFOSRestController
 
         try
         {
-          $em = $this->getDoctrine()->getManager();
-          $RAW_QUERY = "INSERT INTO jugadores (nombre, dorsal, idclub) values (:nombre, :dorsal, :idclub)";        
-          $statement = $em->getConnection()->prepare($RAW_QUERY);
-          // Set parameters 
-          $statement->bindValue('nombre', $nombre);
-          $statement->bindValue('dorsal', $dorsal);
-          $statement->bindValue('idclub', $idclub);
-          $resu = $statement->execute();
+          $jugador = new Jugadores($idclub);
+          $jugador->setNombre($nombre);
+          $jugador->setDorsal($dorsal);
+          $jugador->setIdclub($idclub);
+          $jugador->setClub($this->getClub($idclub));
+            
+          $sn = $this->getDoctrine()->getManager();      
+          $sn->persist($jugador);
+          $sn->flush();
         }
         catch(\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) 
         {
